@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 function InputSample() {
     const [inputs, setInputs] = useState({
         name: '',
         nickname: ''
     }); // 초기값
+
+    const nameInput = useRef();
 
     const { name, nickname } = inputs; // 비구조화 할당으로 값 추출
 
@@ -20,12 +22,13 @@ function InputSample() {
         setInputs({
             name: '',
             nickname: '',
-        })
+        });
+        nameInput.current.focus();
     }
 
     return (
         <div>
-            <input name="name" value={name} onChange={inputChange} />
+            <input name="name" value={name} onChange={inputChange} ref={nameInput} />
             <input name="nickname" value={nickname} onChange={inputChange} />
             <button onClick={resetValue}>초기화</button>
             <div>
